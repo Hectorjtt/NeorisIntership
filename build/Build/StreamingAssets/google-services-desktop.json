@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "483100005526",
+    "project_id": "neoris-db",
+    "storage_bucket": "neoris-db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483100005526:android:7cf711b70a38acde165eb7",
+        "android_client_info": {
+          "package_name": "com.neorisdb.firebasedb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "483100005526-jgtq117ufdq5m2rmoofe7tj2kl9olh27.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEZBGjQVQPSu6CduE7Rh5lzL6n-YXTz18"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "483100005526-jgtq117ufdq5m2rmoofe7tj2kl9olh27.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "483100005526-h36ttglh5718nod2lck31ine7buu0710.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.neorisdb.firebasedb"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

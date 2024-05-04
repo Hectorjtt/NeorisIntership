@@ -506,8 +506,8 @@ body {
 .availableCourses {
   position: relative;
   display: grid;
-  min-height: 500px;
-  padding: 20px;
+  min-height: 700px; 
+  padding: 40px;  
   background: var(--white);
   box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
   border-radius: 20px;
@@ -729,29 +729,46 @@ body {
   z-index: 100;
 }
 
-#prevBtn {
+#prevBtnPromptEngineering {
   left: 10px;
 }
 
-#nextBtn {
+#nextBtnPromptEngineering {
   right: 10px;
 }
 
-#prevBtn2 {
+#prevBtnGitHubCopilot {
   left: 10px;
 }
 
-#nextBtn2 {
+#nextBtnGitHubCopilot {
   right: 10px;
 }
 
-#prevBtn3 {
+#prevBtnGitHubAdvancedSecurity {
   left: 10px;
 }
 
-#nextBtn3 {
+#nextBtnGitHubAdvancedSecurity {
   right: 10px;
 }
+
+#prevBtnGenAi {
+  left: 10px;
+}
+
+#nextBtnGenAi {
+  right: 10px;
+}
+
+#prevBtnGenAiFundamentals {
+  left: 10px;
+}
+
+#nextBtnGenAiFundamentals {
+  right: 10px;
+}
+
 
 /* ====================== Juego ========================== */
 
@@ -931,8 +948,6 @@ textarea {
   color: #F3F2F2;
 }
 
-/* ====================== Admin-FAQ ========================== */
-
 
 
 /* Statistics Grid 2x1 Styles */
@@ -996,24 +1011,11 @@ textarea {
   left: 50%;
   transform: translate(-50%, -50%);
   line-height: 1;
-  font-size: 0.25em;
+  font-size: 0.75em;
 }
 
-.trend {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.icon-upward {
-  color: #4caf50;
-  margin-right: 5px;
-}
-
-/* Customize the stroke color to match your design */
 .circle {
-  stroke: #000;
+  stroke: #1B242A;
 }
 
 /* Barra de busqyeda */
@@ -1128,18 +1130,6 @@ tbody tr:nth-child(even) {
   background-color: #f7fafc;
 }
 
-.status-pending {
-  color: #e53e3e;
-}
-
-.status-dispatch {
-  color: #48bb78;
-}
-
-.status-completed {
-  color: #3182ce;
-}
-
 td .status-circle {
   height: 10px;
   width: 10px;
@@ -1227,4 +1217,52 @@ td .status-circle {
  font-size: 20px;
  line-height: 1.5;
  border-bottom: 1px solid #222;
+ padding-bottom: 25px;
+}
+
+.lock-icon.green {
+  color: green;
+}
+
+.lock-icon.red {
+  color: red;
+}
+
+
+.game-container {
+  display: flex; /* Establece el contenedor como un contenedor flex */
+  flex-direction: column; /* Apila los elementos verticalmente */
+  align-items: center; /* Centra los elementos horizontalmente */
+  padding: 20px; /* Añade un poco de espacio alrededor */
+  width: 100%; /* Asegura que el contenedor tome todo el ancho disponible */
+}
+
+.game-container img {
+  max-width: 70%; /* Hace que la imagen sea responsive */
+  height: auto; /* Mantiene la relación de aspecto de la imagen */
+
+  margin-bottom: 20px; /* Espacio entre la imagen y el botón */
+}
+
+.play-button {
+  display: block; /* Hace que el botón se trate como un bloque */
+  background-color: #004aad;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer; /* Hace el mouse como un puntero al pasar sobre el botón */
+}
+
+.play-button:hover {
+  background-color: #003088;
+}
+
+.game-container2  {
+  display: flex; /* Establece el contenedor como un contenedor flex */
+  flex-direction: column; /* Apila los elementos verticalmente */
+  align-items: center; /* Centra los elementos horizontalmente */
+  padding: 20px; /* Añade un poco de espacio alrededor */
+  width: 100%; /* Asegura que el contenedor tome todo el ancho disponible */
 }

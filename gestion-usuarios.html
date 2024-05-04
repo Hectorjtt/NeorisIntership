@@ -99,7 +99,7 @@
 
                 <div class="user">
                     <a href="miCuenta.html">
-                        <img src="" alt="Profile Picture" id="indexProfileImg">
+                        <img src="img/no_usuario.png" alt="Profile Picture" id="indexProfileImg">
                     </a>
                 </div> 
             </div>
@@ -149,12 +149,13 @@
                 <section class="table__header">
                     <h1>Usuarios NEORIS</h1>
                     <div class="input-group">
-                        <input type="search" placeholder="Buscar datos...">
+                        <input type="search" id="searchUsersInput" placeholder="Buscar usuarios por ID o Nombre...">
                         <img src="img/table/search.png" alt="">
                     </div>
                     <div class="export__file">
                         <label for="export-file" class="export__file-btn" title="Export File"></label>
                         <input type="checkbox" id="export-file">
+                        
                         <div class="export__file-options">
                             <label>Export As &nbsp; &#10140;</label>
                             <label for="export-file" id="toPDF">PDF <img src="img/table/pdf.png" alt=""></label>
@@ -193,9 +194,14 @@
     <!-- =========== Scripts =========  -->
     <script src="js/main.js"></script>
     <script src="js/busqueda.js"></script>
-    <script src="js/users-table.js"></script>
     <script type="module" src="js/index.js"></script>
     <script type="module" src="js/gestion-usuarios.js"></script>
+    <!-- jsPDF para PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+    <!-- SheetJS para Excel -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+
 
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

@@ -17,9 +17,9 @@ const firebaseConfig = {
     projectId: "neoris-db",
     storageBucket: "neoris-db.appspot.com",
     messagingSenderId: "483100005526",
-    appId: "1:483100005526:web:a526738468ab660b165eb7"
-};
-  
+    appId: "1:483100005526:web:a526738468ab660b165eb7",
+    measurementId: "G-QPTE1YS4DC"
+  };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -105,7 +105,3 @@ export const signInWithGoogle = () => {
 export const getUserLogin = () => getDocs(collection(db,'Login'));
 
 export const getUserSignUp = () => getDocs(collection(db,'SignUp'));
-
-
-
-

@@ -119,6 +119,9 @@ function updateUserProfile(user) {
             }else {
                 document.getElementById('profileImgPreview').src = '/img/customer01.jpg'; // imagen por defecto
             }
+             // Mostrar la cantidad de monedas del usuario
+             const coins = userData.coins || 1; // Asume un valor predeterminado de 1 si no está presente
+             document.getElementById('profileCoins').textContent = `${coins} monedas`;
 
         } else {
             console.log("No se encontraron datos del usuario");

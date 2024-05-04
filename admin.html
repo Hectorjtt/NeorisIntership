@@ -100,7 +100,7 @@
 
                 <div class="user">
                     <a href="miCuenta.html">
-                        <img src="" alt="Profile Picture" id="indexProfileImg">
+                        <img src="img/no_usuario.png" alt="Profile Picture" id="indexProfileImg">
                     </a>
                 </div> 
             </div>
@@ -124,68 +124,41 @@
 
             <!-- Statistics Grid 2x1 -->
             <div class="stats-grid">
-                <!-- Daily Traffic Card -->
+                <!-- Courses On Going Card -->
                 <div class="stats-card">
-                <h3>Daily traffic</h3>
-                <div class="number">200</div>
-                <div class="circular-progress" data-percentage="70">
-                    <svg viewBox="0 0 36 36" class="circular-chart">
-                    <path class="circle-bg"
-                        d="M18 2.0845
-                        a 15.9155 15.9155 0 0 1 0 31.831
-                        a 15.9155 15.9155 0 0 1 0 -31.831"
-                    />
-                    <path class="circle"
-                        stroke-dasharray="70, 100"
-                        d="M18 2.0845
-                        a 15.9155 15.9155 0 0 1 0 31.831
-                        a 15.9155 15.9155 0 0 1 0 -31.831"
-                    />
-                    </svg>
-                    <div class="percentage">70%</div>
-                </div>
-                <div class="trend">
-                    <span class="icon-upward">
-                    <ion-icon name="caret-up-outline"></ion-icon>
-                    </span>
-                    +0,5%
-                </div>
-                </div>
+                    <h3>Total de Cursos Activos</h3>
+                    <div class="number" id="dailyTraffic">0</div>
+                </div>                
             
                 <!-- Active Users Card -->
                 <div class="stats-card">
-                <h3>ACTIVE USERS</h3>
-                <div class="number">50</div>
-                <div class="circular-progress" data-percentage="50">
-                    <svg viewBox="0 0 36 36" class="circular-chart">
-                    <path class="circle-bg"
-                        d="M18 2.0845
-                        a 15.9155 15.9155 0 0 1 0 31.831
-                        a 15.9155 15.9155 0 0 1 0 -31.831"
-                    />
-                    <path class="circle"
-                        stroke-dasharray="50, 100"
-                        d="M18 2.0845
-                        a 15.9155 15.9155 0 0 1 0 31.831
-                        a 15.9155 15.9155 0 0 1 0 -31.831"
-                    />
-                    </svg>
-                    <div class="percentage">50%</div>
-                </div>
-                <div class="trend">
-                    <span class="icon-upward">
-                    <ion-icon name="caret-up-outline"></ion-icon>
-                    </span>
-                    +0,10%
-                </div>
+                    <h3>Usuarios Activos</h3>
+                    <div class="number" id="activeUsersCount">50</div>
+                    <div class="circular-progress" data-percentage="50">
+                        <svg viewBox="0 0 36 36" class="circular-chart">
+                            <path class="circle-bg"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                            />
+                            <path class="circle"
+                                stroke-dasharray="70, 100"
+                                d="M18 2.0845
+                                a 15.9155 15.9155 0 0 1 0 31.831
+                                a 15.9155 15.9155 0 0 1 0 -31.831"
+                            />
+                        </svg>
+                        <div class="percentage" id="activeUsersPercentage">50%</div>
+                    </div>
+                </div>                
             </div>
         </div>
-  
-
-        <!-- =========== Scripts =========  -->
+    </div>
+    <!-- =========== Scripts =========  -->
     <script src="js/main.js"></script>
     <script src="js/busqueda.js"></script>
     <script type="module" src="/js/index.js"></script>
+    <script type="module" src="js/admin.js"></script>
 
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>

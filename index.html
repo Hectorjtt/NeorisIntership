@@ -9,6 +9,18 @@
     <link rel="icon" id="dynamic-favicon" type="image/png" href="img/neoris-logos/Icon_light.png"> 
     <!-- ======= Styles ====== -->
     <link rel="stylesheet" href="/styles/style.css">
+
+    <!-- Load Google Charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-auth.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-firestore.js"></script>
+    <!-- Ionicons for icons -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </head>
 
 <body>
@@ -101,7 +113,7 @@
                 <div class="user">
                     <a href="miCuenta.html">
                         <span id="username"></span>
-                        <img src="" alt="Profile Picture" id="indexProfileImg">
+                        <img src="img/no_usuario.png" alt="Profile Picture" id="indexProfileImg">
                     </a>
                 </div> 
             </div>
@@ -116,7 +128,7 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">4</div>
+                        <div class="numbers" id="indexCoursesOnGoing">-</div>
                         <div class="cardName">Courses On Going</div>
                     </div>
 
@@ -127,7 +139,7 @@
 
                 <div class="card">
                     <div>
-                        <div class="numbers">455</div>
+                        <div class="numbers" id="index-coins"></div>
                         <div class="cardName">Monedas</div>
                     </div>
 
@@ -140,128 +152,138 @@
             <!-- ================ Graphs ================= -->
             
             <div class="details">
-                <!-- Gráficas Container Start -->
                 <div class="chartsContainer">
                     <div class="recentMessages">
-                        <div class="cardHeader">
-                            <h2>Actividad Diaria</h2>
-                         
-                        </div>
+                        <div class="cardHeader"><h2>Actividad Diaria</h2></div>
                         <div class="container-charts">
-                            <div class="chart">
-                            <canvas id="line"></canvas>
-                            </div>
+                            <div id="chart_div" style="width: 900px; height: 300px;"></div>
                         </div>
-                    </div>
-                    
-                    <!-- Espaciador entre gráficas -->
-                    <div class="chartSpacer"></div>
-                    
-                    <div class="recentMessages">
-                        <div class="cardHeader">
-                            <h2>Monedas obtenidas</h2>
-                         
-                        </div>
-                        <div class="container-charts">
-                            <div class="chart">
-                            <canvas id="line2"></canvas>
-                            </div>
-                        </div>
-                    </div>
                 </div>
+        
+                <script>
+                    var firebaseConfig = {
+                        apiKey: "AIzaSyD4nzOsItul2B4iLwOQVm9f7Tc-pAvfgp4",
+                        authDomain: "neoris-db.firebaseapp.com",
+                        projectId: "neoris-db",
+                        storageBucket: "neoris-db.appspot.com",
+                        messagingSenderId: "483100005526",
+                        appId: "1:483100005526:web:a526738468ab660b165eb7"
+                    };
+                
+                    // Initialize Firebase
+                    firebase.initializeApp(firebaseConfig);
+                    var db = firebase.firestore();
+                    var auth = firebase.auth();
+                
+                    google.charts.load('current', {'packages':['corechart', 'bar']});
+                
+                    auth.onAuthStateChanged(function(user) {
+                        if (user) {
+                            // Usuario está logueado
+                            console.log('User is logged in:', user.uid);
+                            google.charts.setOnLoadCallback(function() {
+                                drawChart(user.uid);
+                            });
+                        } else {
+                            // Usuario no está logueado
+                            console.log('No user logged in');
+                        }
+                    });
+                
+                    async function drawChart(userId) {
+                        console.log('Drawing chart for User ID:', userId); // Depuración
+                
+                        const querySnapshot = await db.collection("userSessions").where("userId", "==", userId).get();
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('date', 'Fecha');
+                        data.addColumn('number', 'Sesiones');
+                
+                        let sessionCounts = {};
+                        let maxSessions = 0;  // Variable para rastrear el máximo número de sesiones
+                
+                        querySnapshot.forEach(doc => {
+                            let sessionData = doc.data();
+                            let sessionDate = new Date(sessionData.timestamp.seconds * 1000);
+                            let sessionDateString = sessionDate.toISOString().split('T')[0];  // Formato YYYY-MM-DD
+                
+                            if (sessionCounts[sessionDateString]) {
+                                sessionCounts[sessionDateString]++;
+                            } else {
+                                sessionCounts[sessionDateString] = 1;
+                            }
+                
+                            // Actualizar el máximo de sesiones si es necesario
+                            if (sessionCounts[sessionDateString] > maxSessions) {
+                                maxSessions = sessionCounts[sessionDateString];
+                            }
+                        });
+                
+                        // Añadir cada fecha y cuenta al DataTable
+                        for (let date in sessionCounts) {
+                            let dateObj = new Date(date);
+                            data.addRow([dateObj, sessionCounts[date]]);
+                        }
+                
+                        var options = {
+                            title: 'Actividad por Día',
+                            legend: { position: 'bottom' },
+                            chartArea: { width: '80%', height: '70%' },
+                            hAxis: {
+                                title: 'Día',
+                                format: 'dd MMM, yyyy',
+                                gridlines: { count: 15 }
+                            },
+                            vAxis: {
+                                title: 'Sesiones',
+                                minValue: 0,
+                                maxValue: Math.max(5, maxSessions),  // Asegura que se muestra al menos de 1 a 5
+                                ticks: Array.from({length: Math.max(5, maxSessions)}, (_, i) => i + 1)  // Generar ticks automáticamente
+                            },
+                            bar: { groupWidth: "20%" }  // Establece el ancho de las barras
+                        };
+                
+                        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+                        chart.draw(data, options);
+                    }
+                </script>
 
                 <!-- ================= Available Courses ================ -->
-                <div class="availableCourses">
+                <!-- ================= Available Courses ================ -->
+                <div>
                     <div class="cardHeader">
                         <h2>Available Courses</h2>
                     </div>
-
-                    <table>
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="img/courses-logo/html-5.png" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>HTML <br> <span>Design 8uyu Management
-                                    Restaurant - Singapore</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="img/courses-logo/css-3.png" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>CSS <br> <span>Design Landing Page - Property
-                                    Agency - United Kingdom</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="img/courses-logo/swift_logo.png" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Swift <br> <span>Design Mobile Apps Start up Fashiontale - Russia</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="img/courses-logo/react_logo.png" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>React <br> <span>Design E-Commerce Shoesy Apps from Australia</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="img/courses-logo/c++_logo.png" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>C++ <br> <span>DESCRIPCION CURSO</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="img/courses-logo/c_sharp.png" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>C# <br> <span>DESCRIPCION CURSO</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="img/courses-logo/unity-69.svg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Unity <br> <span>DESCRIPCION CURSO</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="img/courses-logo/bs_logo.png" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>BootStrap <br> <span>DESCRIPCION CURSO</span></h4>
-                            </td>
-                        </tr>
+                
+                    <table id="availableCoursesTable">
+                        <!-- El contenido se llenará dinámicamente desde la función JS -->
                     </table>
+                    <!-- ================= Available Courses ================ -->
+                <div>
+                    <div class="cardHeader">
+                    
+                    </div>
+                
+                    <table id="availableCoursesTable">
+                        <!-- El contenido se llenará dinámicamente desde la función JS -->
+                    </table>
+                </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+    <!-- Firebase Config -->
+    <script type="module" src="js/firebase.js"></script>
+
 
     <!-- =========== Scripts =========  -->
     <script src="js/main.js"></script>
     <script src="js/busqueda.js"></script>
     <script type="module" src="js/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
-    <script src="js/charts.js"></script>
+    <script type="module" src="js/c.js"></script>
+
 
 
     <!-- ====== ionicons ======= -->

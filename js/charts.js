@@ -4,7 +4,7 @@ const ctx = document.getElementById('line');
   const line = new Chart(ctx, {
     type: 'line',
     data: {
-      labels: ['1', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+      labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
       datasets: [{
         label: '# De Sesiones Activas',
         data: [8, 10, 3, 5, 2, 3],
@@ -32,7 +32,7 @@ const ctx = document.getElementById('line');
   const line2 = new Chart(ctx2, {
     type: 'line',
     data: {
-      labels: ['8', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+      labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
       datasets: [{
         label: '# Monedas totales',
         data: [14, 18, 8, 12, 2, 20],
@@ -55,7 +55,7 @@ const ctx = document.getElementById('line');
   const line3 = new Chart(ctx3, {
     type: 'line',
     data: {
-      labels: ['1', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+      labels: ['Nivel1', 'Nivel2', 'Nivel3', 'Nivel4', 'Nivel5', 'Nivel6'],
       datasets: [{
         label: '# Minutos totales',
         data: [14, 18, 8, 12, 2, 20],
@@ -78,7 +78,7 @@ const ctx = document.getElementById('line');
   const line4 = new Chart(ctx4, {
     type: 'bar',
     data: {
-      labels: ['2', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+      labels: ['Nivel1', 'Nivel4', 'Nivel10', 'Nivel5', 'Nivel2', 'Nivel13'],
       datasets: [{
         label: '# Jugadas totales',
         data: [14, 18, 8, 12, 2, 20],
@@ -101,7 +101,7 @@ const ctx = document.getElementById('line');
   const line5 = new Chart(ctx5, {
     type: 'bar',
     data: {
-      labels: ['3', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+      labels: ['Hector', 'Diego', 'Pancho', 'Kike', 'Sheccid', 'Rebeca'],
       datasets: [{
         label: '# Puntos totales',
         data: [14, 18, 8, 12, 2, 20],
@@ -125,7 +125,7 @@ const ctx = document.getElementById('line');
   const line6 = new Chart(ctx6, {
     type: 'line',
     data: {
-      labels: ['4', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+      labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
       datasets: [{
         label: '# Monedas totales',
         data: [14, 18, 8, 12, 2, 20],
